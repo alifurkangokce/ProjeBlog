@@ -16,6 +16,7 @@ namespace Blog.Model
         public string Description { get; set; }
         public Guid? CategoryId { get; set; }
 
+        public string Photo { get; set; }
         public virtual Category Category { get; set; }
 
     }

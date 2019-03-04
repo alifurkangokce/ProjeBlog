@@ -1,4 +1,5 @@
-﻿using Blog.Model;
+﻿using Blog.Data.Builders;
+using Blog.Model;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,9 @@ namespace Blog.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            new PostBuilder(modelBuilder.Entity<Post>());
+            new GaleryBuilder(modelBuilder.Entity<Galery>());
+            new CategoryBuilder(modelBuilder.Entity<Category>());
 
         }
     }

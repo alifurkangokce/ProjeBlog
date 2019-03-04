@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Blog.Admin.Models;
+using Blog.Model;
+using Blog.Data;
 
 namespace Blog.Admin
 {
