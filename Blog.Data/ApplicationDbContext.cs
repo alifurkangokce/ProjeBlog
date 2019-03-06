@@ -37,5 +37,7 @@ namespace Blog.Data
             new CategoryBuilder(modelBuilder.Entity<Category>());
 
         }
+
+        
     }
 }
