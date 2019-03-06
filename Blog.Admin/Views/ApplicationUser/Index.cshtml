@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Blog.Model.ApplicationUser>
+
+@{
+    ViewBag.Title = "Kullanıcılar";
+}
+
+<h2>Kullanıcılar</h2>
+
+@if (TempData["CurrentUser"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+                alert("@TempData["CurrentUser"]");
+            };
+    </script>
+}
+@if (TempData["NullUser"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+                alert("@TempData["NullUser"]");
+            };
+    </script>
+}
+
+<p>
+    <a href="@Url.Action("Register", "Account")" class="btn btn-primary btn-xs">Yeni Kullanıcı Ekle</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            E-Posta
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.Id})" class="btn btn-primary btn-xs">Düzenle</a>
+                <a href="@Url.Action("Delete", new { id = item.Id})" class="btn btn-danger btn-xs">Sil</a>
+            </td>
+        </tr>
+    }
+</table>
