@@ -16,9 +16,6 @@ namespace Blog.Admin.Controllers
             base.OnActionExecuted(filterContext);
         }
         // GET: ControllerBase
-        public ActionResult Index()
-        {
-            return View();
-        }
+        
     }
 }

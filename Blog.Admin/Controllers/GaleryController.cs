@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Blog.Admin.Controllers
 {
-    public class GaleryController : Controller
+    public class GaleryController : ControllerBase
     {
         // GET: Galery
         private readonly IGaleryService galeryService;

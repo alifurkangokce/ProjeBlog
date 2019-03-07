@@ -10,12 +10,12 @@ using System.Web.Mvc;
 
 namespace Blog.Admin.Controllers
 {
-    public class PostController : Controller
+    public class PostController : ControllerBase
     {
         // GET: Post
         private readonly IPostService postService;
         private readonly ICategoryService categoryService;
-        public PostController(IPostService postService, ICategoryService categoryService)
+        public PostController(IPostService postService, ICategoryService categoryService):base()
         {
             this.postService = postService;
             this.categoryService = categoryService;

@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Blog.Admin.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController : ControllerBase
     {
         // GET: Category
         private readonly ICategoryService categoryService;
