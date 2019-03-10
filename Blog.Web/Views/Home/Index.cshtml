@@ -8,7 +8,7 @@
         <div class="header__content row">
 
             <div class="header__logo">
-                <a class="logo" href="/index.html">
+                <a class="logo" href="@Url.Action("Index", "Home")">
                     <img src="/images/BLG.jpg" alt="Homepage">
                 </a>
             </div> <!-- end header__logo -->
@@ -52,15 +52,15 @@
                 <h2 class="header__nav-heading h6">Site Navigation</h2>
 
                 <ul class="header__nav">
-                    <li class="current"><a href="/index.html" title="">Ana Sayfa</a></li>
+                    <li class="current"><a href="@Url.Action("Index", "Home")">Anasayfa</a></li>
                     <li>
-                        <a href="/#0" title="">Kategoriler</a>
+                        <a href="@Url.Action("Index", "Category")">Kategoriler</a>
                     </li>
                     <li>
-                        <a href="/#0" title="">Galeri</a>
+                        <a href="@Url.Action("Index", "Galery")">Galeri</a>
                     </li>
-                    <li><a href="/about.html" title="">Hakkımızda</a></li>
-                    <li><a href="/contact.html" title="">İletişim</a></li>
+                    <li><a href="@Url.Action("About", "Home")">Hakkında</a></li>
+                    <li><a href="@Url.Action("contact", "Home")">İletişim</a></li>
                 </ul> <!-- end header__nav -->
 
                 <a href="/#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>

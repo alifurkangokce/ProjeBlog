@@ -21,10 +21,10 @@ namespace MyPortfolio.Web.Controllers
 
         }
         // GET: Post
-        public ActionResult Index(/*int page = 1*/ int? page)
+        public ActionResult Index()
         {
 
-            ViewBag.Categories = categoryService.GetAll();
+           // ViewBag.Categories = categoryService.GetAll();
             //int skip = (page - 1) * 5;
             //int take = 5;
             //int pageCount = Convert.ToInt32((Math.Ceiling((double)postService.GetAll().OrderByDescending(o => o.CreatedAt).Count() / (double)5)));
@@ -35,11 +35,8 @@ namespace MyPortfolio.Web.Controllers
             // son yazılar
 
             //ViewBag.Page = page;
-            var posts = postService.GetAll();
-            var pageNumber = page ?? 1;
-            var onePageOfPosts = posts.ToPagedList(pageNumber, 5);
             ViewBag.AssetsUrl = ConfigurationManager.AppSettings["assetsUrl"];
-            return View(onePageOfPosts);
+            return View();
         }
         public ActionResult Details(Guid id)
         {
