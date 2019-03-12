@@ -18,10 +18,9 @@ namespace Blog.Web.Controllers
         // GET: Galery
         public ActionResult Index()
         {
-
-
+       
             ViewBag.AssetsUrl = ConfigurationManager.AppSettings["assetsUrl"];
-            return View();
+            return View(galeryService.GetAll());
         }
     }
 }
