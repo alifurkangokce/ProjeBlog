@@ -85,7 +85,7 @@
 
                             <h1><a href="/#0" title="">Ruhunu beslemekten vazgeçme</a></h1>
 
-                         
+
                         </div> <!-- end entry__content -->
 
                     </div> <!-- end entry -->
@@ -127,38 +127,79 @@
 <section class="s-content">
 
 
-    <div>
+    <div class="row">
         @foreach (var item in Model)
         {
+            <div class="col-md-4">
 
-        
-            <img src="@(ViewBag.AssetsUrl)@item.Photo" style=" width:200px;" />
-        
-            <a href="@Url.Action("Index","Category",new {id=item.Id })"> @Html.Raw(item.Description)</a>
+
+                <img src="@(ViewBag.AssetsUrl)@item.Photo" style=" width:300px; " />
+                <a href="@Url.Action("Index","Category",new {id=item.Id })" class="entry__thumb-link"> @Html.Raw(item.Description)</a>
+
+
+            </div>
+
+
 
         }
-
     </div>
+    <div class="row">
+        <div class="masonry-wrap">
+            <div class="masonry">
+                @foreach (var item in Model)
+                {
 
-        <div class="row">
-            <div class="col-full">
-                <nav class="pgn">
-                    <ul>
-                        <li><a class="pgn__prev" href="/#0">Prev</a></li>
-                        <li><a class="pgn__num" href="/#0">1</a></li>
-                        <li><span class="pgn__num current">2</span></li>
-                        <li><a class="pgn__num" href="/#0">3</a></li>
-                        <li><a class="pgn__num" href="/#0">4</a></li>
-                        <li><a class="pgn__num" href="/#0">5</a></li>
-                        <li><span class="pgn__num dots">…</span></li>
-                        <li><a class="pgn__num" href="/#0">8</a></li>
-                        <li><a class="pgn__next" href="/#0">Next</a></li>
-                    </ul>
-                </nav>
+                    <div class="col-md-4">
+
+
+
+
+                        <div class="entry__thumb">
+                            <a href="single-standard.html" class="entry__thumb-link">
+                                <img src="@(ViewBag.AssetsUrl)@item.Photo" style=" width:300px; " />
+
+                            </a>
+                        </div>
+                        <div class="entry__text">
+                            <div class="entry__header">
+
+                                <div class="entry__date">
+                                    <a href="single-standard.html">December 15, 2017</a>
+                                </div>
+                                <h1 class="entry__title"><a href="@Url.Action("Index","Category",new {id=item.Id })"> @Html.Raw(item.Description)</a></h1>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+                }
             </div>
         </div>
+    </div>
 
-    </section> <!-- s-content -->
+                <div class="row">
+                    <div class="col-full">
+                        <nav class="pgn">
+                            <ul>
+                                <li><a class="pgn__prev" href="/#0">Prev</a></li>
+                                <li><a class="pgn__num" href="/#0">1</a></li>
+                                <li><span class="pgn__num current">2</span></li>
+                                <li><a class="pgn__num" href="/#0">3</a></li>
+                                <li><a class="pgn__num" href="/#0">4</a></li>
+                                <li><a class="pgn__num" href="/#0">5</a></li>
+                                <li><span class="pgn__num dots">…</span></li>
+                                <li><a class="pgn__num" href="/#0">8</a></li>
+                                <li><a class="pgn__next" href="/#0">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+</section> <!-- s-content -->
 <!-- s-extra
 ================================================== -->
 <section class="s-extra">
