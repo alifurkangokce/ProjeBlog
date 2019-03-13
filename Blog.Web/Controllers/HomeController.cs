@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Blog.Service;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -9,9 +11,15 @@ namespace Blog.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IPostService postService;
+        public HomeController(IPostService postService)
+        {
+            this.postService = postService;
+        }
         public ActionResult Index()
         {
-            return View();
+            ViewBag.AssetsUrl = ConfigurationManager.AppSettings["assetsUrl"];
+            return View(postService.GetAll());
         }
 
         public ActionResult About()
