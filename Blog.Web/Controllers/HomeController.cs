@@ -12,12 +12,15 @@ namespace Blog.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IPostService postService;
-        public HomeController(IPostService postService)
+        private readonly ICategoryService categoryService;
+        public HomeController(IPostService postService, ICategoryService categoryService)
         {
             this.postService = postService;
+            this.categoryService = categoryService;
         }
         public ActionResult Index()
         {
+            ViewBag.Categories = categoryService.GetAll();
             ViewBag.AssetsUrl = ConfigurationManager.AppSettings["assetsUrl"];
             return View(postService.GetAll());
         }

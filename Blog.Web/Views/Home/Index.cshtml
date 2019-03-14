@@ -54,8 +54,19 @@
 
                 <ul class="header__nav">
                     <li class="current"><a href="@Url.Action("Index", "Home")">Anasayfa</a></li>
-                    <li>
+                    <li class="has-children">
                         <a href="@Url.Action("Index", "Category")">Kategoriler</a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="@Url.Action("Index", "Category")">Kategoriler</a>
+                            </li>
+                            @foreach (var item in ViewBag.Categories)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Details","Category",new { id = item.Id })">@item.Name</a>
+                                </li>
+                            }
+                        </ul>
                     </li>
                     <li>
                         <a href="@Url.Action("Index", "Galery")">Galeri</a>
@@ -127,7 +138,7 @@
 <section class="s-content">
 
 
-    <div class="row">
+    @*<div class="row">
         @foreach (var item in Model)
         {
             <div class="col-md-4">
@@ -142,7 +153,7 @@
 
 
         }
-    </div>
+    </div>*@
     <div class="row">
         <div class="masonry-wrap">
             <div class="masonry">
@@ -155,16 +166,16 @@
 
 
                         <div class="entry__thumb">
-                            <a href="single-standard.html" class="entry__thumb-link">
+                            <a href="@Url.Action("Index","Category",new {id=item.Id })" class="entry__thumb-link">
                                 <img src="@(ViewBag.AssetsUrl)@item.Photo" style=" width:300px; " />
 
                             </a>
                         </div>
                         <div class="entry__text">
                             <div class="entry__header">
-
+                                @*<a class="entry__header" href="@Url.Action("Details", "Category", new { id = item.Id })"><h3>@item.Title</h3></a>*@
                                 <div class="entry__date">
-                                    <a href="single-standard.html">December 15, 2017</a>
+                                    <a href="single-standard.html">@item.CreatedAt</a>
                                 </div>
                                 <h1 class="entry__title"><a href="@Url.Action("Index","Category",new {id=item.Id })"> @Html.Raw(item.Description)</a></h1>
 

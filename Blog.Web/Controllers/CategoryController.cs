@@ -18,8 +18,14 @@ namespace Blog.Web.Controllers
         // GET: Category
         public ActionResult Index()
         {
-            //ViewBag.AssetsUrl = ConfigurationManager.AppSettings["assetsUrl"];
-            //return View(categoryService.GetAll());
+            ViewBag.AssetsUrl = ConfigurationManager.AppSettings["assetsUrl"];
+            return View();
+            
+        }
+        public ActionResult Details()
+        {
+
+            ViewBag.AssetsUrl = ConfigurationManager.AppSettings["assetsUrl"];
             return View();
         }
     }
