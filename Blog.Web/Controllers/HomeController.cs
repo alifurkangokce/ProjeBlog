@@ -20,6 +20,7 @@ namespace Blog.Web.Controllers
         }
         public ActionResult Index()
         {
+           
             ViewBag.Categories = categoryService.GetAll();
             ViewBag.AssetsUrl = ConfigurationManager.AppSettings["assetsUrl"];
             return View(postService.GetAll());
@@ -28,7 +29,7 @@ namespace Blog.Web.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
+            ViewBag.Categories = categoryService.GetAll();
             return View();
         }
 
@@ -36,7 +37,7 @@ namespace Blog.Web.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "İletişim sayfası.";
-
+            ViewBag.Categories = categoryService.GetAll();
             return View();
         }
 

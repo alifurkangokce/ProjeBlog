@@ -50,8 +50,19 @@
 
                 <ul class="header__nav">
                     <li class="current"><a href="@Url.Action("Index", "Home")">Anasayfa</a></li>
-                    <li>
+                    <li class="has-children">
                         <a href="@Url.Action("Index", "Category")">Kategoriler</a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="@Url.Action("Index", "Category")">Kategoriler</a>
+                            </li>
+                            @foreach (var item in ViewBag.Categories)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Details","Category",new { id = item.Id })">@item.Name</a>
+                                </li>
+                            }
+                        </ul>
                     </li>
                     <li>
                         <a href="@Url.Action("Index", "Galery")">Galeri</a>

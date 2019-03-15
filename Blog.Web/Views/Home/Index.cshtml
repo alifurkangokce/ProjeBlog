@@ -167,7 +167,7 @@
 
                         <div class="entry__thumb">
                             <a href="@Url.Action("Index","Category",new {id=item.Id })" class="entry__thumb-link">
-                                <img src="@(ViewBag.AssetsUrl)@item.Photo" style=" width:300px; " />
+                                <img src="@(ViewBag.AssetsUrl)@item.Photo" style=" width:300px; height:200px; " />
 
                             </a>
                         </div>
@@ -175,7 +175,7 @@
                             <div class="entry__header">
                                 @*<a class="entry__header" href="@Url.Action("Details", "Category", new { id = item.Id })"><h3>@item.Title</h3></a>*@
                                 <div class="entry__date">
-                                    <a href="single-standard.html">@item.CreatedAt</a>
+                                    <a href="single-standard.html">@item.CreatedAt.ToString("dd/MM/yyyy")</a>
                                 </div>
                                 <h1 class="entry__title"><a href="@Url.Action("Index","Category",new {id=item.Id })"> @Html.Raw(item.Description)</a></h1>
 

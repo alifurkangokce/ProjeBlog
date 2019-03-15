@@ -50,8 +50,19 @@
 
                 <ul class="header__nav">
                     <li class="current"><a href="@Url.Action("Index", "Home")">Anasayfa</a></li>
-                    <li>
+                    <li class="has-children">
                         <a href="@Url.Action("Index", "Category")">Kategoriler</a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="@Url.Action("Index", "Category")">Kategoriler</a>
+                            </li>
+                            @foreach (var item in ViewBag.Categories)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Details","Category",new { id = item.Id })">@item.Name</a>
+                                </li>
+                            }
+                        </ul>
                     </li>
                     <li>
                         <a href="@Url.Action("Index", "Galery")">Galeri</a>
@@ -77,7 +88,7 @@
                     <div class="entry" style="background-image:url('images/thumbs/featured/featured-guitarman.jpg');">
 
                         <div class="entry__content">
-                            <span class="entry__category"><a href="/#0">Müzik</a></span>
+                            <span class="entry__category"><a href="/#0">@Model.Name</a></span>
 
                             <h1><a href="/#0" title="">Ruhunu beslemekten vazgeçme</a></h1>
 
@@ -122,7 +133,7 @@
 
     <div class="row narrow">
         <div class="col-full s-content__header" data-aos="fade-up">
-            <h1>Category: Lifestyle</h1>
+            <h1>@Model.Name</h1>
 
             <p class="lead">Dolor similique vitae. Exercitationem quidem occaecati iusto. Id non vitae enim quas error dolor maiores ut. Exercitationem earum ut repudiandae optio veritatis animi nulla qui dolores.</p>
         </div>
