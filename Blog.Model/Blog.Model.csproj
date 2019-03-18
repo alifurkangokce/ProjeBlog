@@ -60,6 +60,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Galery.cs" />
     <Compile Include="Post.cs" />
+    <Compile Include="PostFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

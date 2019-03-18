@@ -10,6 +10,11 @@ namespace Blog.Model
 {
     public class Post:BaseEntity
     {
+        public Post()
+        {
+            PostFiles = new HashSet<PostFile>();
+        }
+
         [Display(Name = "Başlık")]
         public string Title{ get; set; }
         [Display(Name = "Açıklama")]
@@ -18,6 +23,8 @@ namespace Blog.Model
 
         public string Photo { get; set; }
         public virtual Category Category { get; set; }
+
+        public virtual ICollection<PostFile> PostFiles { get; set; }
 
     }
 }

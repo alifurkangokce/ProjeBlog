@@ -34,33 +34,38 @@ namespace Blog.Admin.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(Post post, HttpPostedFileBase upload)
+        public ActionResult Create(Post post, HttpPostedFileBase[] Uploads)
         {
             if (ModelState.IsValid)
             {
-                if (upload != null && upload.ContentLength > 0)
+                if (Uploads != null && Uploads.Length >= 1)
                 {
-                    string fileName = Path.GetFileName(upload.FileName);
-                    string extension = Path.GetExtension(fileName).ToLower();
-                    if (extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".gif")
+                    post.PostFiles.Clear();
+                    foreach (var item in Uploads)
                     {
-                        string path = Path.Combine(ConfigurationManager.AppSettings["uploadPath"], fileName);
-                        upload.SaveAs(path);
-                        post.Photo = fileName;
-                        postService.Insert(post);
-                        return RedirectToAction("index");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("Photo", "Dosya uzantısı .jpg, .jpeg, .png ya da .gif olmalıdır.");
+                        if (item != null && item.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(item.FileName);
+                            var extension = Path.GetExtension(fileName).ToLower();
+                            if (extension == ".jpg" || extension == ".gif" || extension == ".png" || extension == ".pdf" || extension == ".doc" || extension == ".docx")
+                            {
+                                var path = Path.Combine(ConfigurationManager.AppSettings["uploadPath"], fileName);
+                                item.SaveAs(path);
+                                var file = new PostFile();
+                                file.Id = Guid.NewGuid();
+                                file.FileName = fileName;
+                                file.CreatedAt = DateTime.Now;
+                                file.CreatedBy = User.Identity.Name;
+                                file.UpdatedAt = DateTime.Now;
+                                file.UpdatedBy = User.Identity.Name;
+                                
+                                post.PostFiles.Add(file);
+                            }
+                        }
                     }
                 }
-                else
-                {
-                    postService.Insert(post);
-                    return RedirectToAction("index");
-                }
-
+                postService.Insert(post);
+                return RedirectToAction("Index");
             }
             ViewBag.CategoryId = new SelectList(categoryService.GetAll(), "Id", "Name", post.CategoryId);
             return View(post);
@@ -78,34 +83,51 @@ namespace Blog.Admin.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit(Post post, HttpPostedFileBase upload)
+        public ActionResult Edit(Post post, HttpPostedFileBase[] Uploads)
         {
             if (ModelState.IsValid)
             {
-                if (upload != null && upload.ContentLength > 0)
-                {
-                    string fileName = Path.GetFileName(upload.FileName);
-                    string extension = Path.GetExtension(fileName).ToLower();
-                    if (extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".gif")
-                    {
-                        string path = Path.Combine(ConfigurationManager.AppSettings["uploadPath"], fileName);
-                        upload.SaveAs(path);
-                        post.Photo = fileName;
-                        postService.Update(post);
-                        return RedirectToAction("index");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("Photo", "Dosya uzantısı .jpg, .jpeg, .png ya da .gif olmalıdır.");
 
+                var model = postService.Find(post.Id);
+                if (Uploads != null && Uploads.Length >= 1)
+                {
+                    model.PostFiles.Clear();
+                    foreach (var item in Uploads)
+                    {
+                        if (item != null && item.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(item.FileName);
+                            var extension = Path.GetExtension(fileName).ToLower();
+                            if (extension == ".jpg" || extension == ".gif" || extension == ".png" || extension == ".pdf" || extension == ".doc" || extension == ".docx")
+                            {
+                                var path = Path.Combine(ConfigurationManager.AppSettings["uploadPath"], fileName);
+                                item.SaveAs(path);
+                                var file = new PostFile();
+                                file.Id = Guid.NewGuid();
+                                file.FileName = fileName;
+                                file.CreatedAt = DateTime.Now;
+                                file.CreatedBy = User.Identity.Name;
+                                file.UpdatedAt = DateTime.Now;
+                                file.UpdatedBy = User.Identity.Name;
+                                
+                                model.PostFiles.Add(file);
+                            }
+                        }
                     }
                 }
-                else
-                {
-                    // resim seçilip yüklenmese bile diğer bilgileri güncelle
-                    postService.Update(post);
-                    return RedirectToAction("index");
-                }
+
+
+
+
+                model.Title = post.Title;
+                
+                model.Description = post.Description;
+               
+               
+                model.Photo = post.Photo;
+          
+                postService.Update(model);
+                return RedirectToAction("Index");
 
 
             }
