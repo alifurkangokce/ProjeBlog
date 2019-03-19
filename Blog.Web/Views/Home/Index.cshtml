@@ -167,7 +167,7 @@
 
                         <div class="entry__thumb">
                             <a href="@Url.Action("Index","Category",new {id=item.Id })" class="entry__thumb-link">
-                                <img src="@(ViewBag.AssetsUrl)@item.Photo" style=" width:300px; height:200px; " />
+                                <img src="@(ViewBag.AssetsUrl)@(item.PostFiles.FirstOrDefault()?.FileName)" style=" width:300px; height:200px; " />
 
                             </a>
                         </div>

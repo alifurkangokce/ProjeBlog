@@ -23,7 +23,8 @@ namespace Blog.Web.Controllers
            
             ViewBag.Categories = categoryService.GetAll();
             ViewBag.AssetsUrl = ConfigurationManager.AppSettings["assetsUrl"];
-            return View(postService.GetAll());
+            var posts = postService.GetAll();
+            return View(posts);
         }
 
         public ActionResult About()
