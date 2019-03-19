@@ -13,6 +13,7 @@ namespace Blog.Model
         public Category()
         {
             Posts = new HashSet<Post>();
+            CategoryFiles = new HashSet<CategoryFile>();
         }
 
         [Display(Name="Kategori Adı")]
@@ -23,6 +24,7 @@ namespace Blog.Model
         public string Photo { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<CategoryFile> CategoryFiles{ get; set; }
 
     }
 }

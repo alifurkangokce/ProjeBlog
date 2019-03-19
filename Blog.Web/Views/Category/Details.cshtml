@@ -135,6 +135,20 @@
         <div class="col-full s-content__header" data-aos="fade-up">
             <h1>@Model.Name</h1>
 
+            <div class="s-content__media col-full">
+                <div class="s-content__slider slider">
+                    <div class="slider__slides">
+                        @foreach (var item in Model.CategoryFiles)
+                        {
+                            <div class="slider__slide">
+                                <img src="@(ViewBag.AssetsUrl)@(item.FileName)" style=" width:100%;" />
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div> <!-- end s-content__media -->
+
             <p class="lead">Dolor similique vitae. Exercitationem quidem occaecati iusto. Id non vitae enim quas error dolor maiores ut. Exercitationem earum ut repudiandae optio veritatis animi nulla qui dolores.</p>
         </div>
     </div>

@@ -2,6 +2,8 @@
 using Blog.Service;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -31,15 +33,46 @@ namespace Blog.Admin.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(Category category)
+        public ActionResult Create(Category category, HttpPostedFileBase[] Uploads)
         {
             if (ModelState.IsValid)
             {
+                if (Uploads != null && Uploads.Length >= 1)
+                {
+                    category.CategoryFiles.Clear();
+                    foreach (var item in Uploads)
+                    {
+                        if (item != null && item.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(item.FileName);
+                            var extension = Path.GetExtension(fileName).ToLower();
+                            if (extension == ".jpg" || extension == ".gif" || extension == ".png" || extension == ".pdf" || extension == ".doc" || extension == ".docx")
+                            {
+                                var path = Path.Combine(ConfigurationManager.AppSettings["uploadPath"], fileName);
+                                item.SaveAs(path);
+                                var file = new CategoryFile();
+                                file.Id = Guid.NewGuid();
+                                file.FileName = fileName;
+                                file.CreatedAt = DateTime.Now;
+                                file.CreatedBy = User.Identity.Name;
+                                file.UpdatedAt = DateTime.Now;
+                                file.UpdatedBy = User.Identity.Name;
+
+                                category.CategoryFiles.Add(file);
+                            }
+                        }
+                    }
+                }
                 categoryService.Insert(category);
                 return RedirectToAction("Index");
+
+
             }
-            return View();
+
+                return View(category);
+            
         }
+    
         public ActionResult Edit(Guid id)
         {
 
