@@ -14,17 +14,19 @@ namespace Blog.Admin.Controllers
     {
         // GET: Galery
         private readonly IGaleryService galeryService;
-        public GaleryController(IGaleryService galeryService):base()
+        private readonly ICategoryService categoryService;
+        public GaleryController(IGaleryService galeryService,ICategoryService categoryService) :base()
         {
             this.galeryService = galeryService;
-
+            this.categoryService = categoryService;
 
         }
         // GET: Category
         public ActionResult Index()
         {
-            var categories = galeryService.GetAll();
-            return View(categories);
+            var galeries = galeryService.GetAll();
+            ViewBag.Categories = categoryService.GetAll();
+            return View(galeries);
         }
         public ActionResult Create()
         {
@@ -33,34 +35,41 @@ namespace Blog.Admin.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(Galery galery, HttpPostedFileBase upload)
+        public ActionResult Create(Galery galery, HttpPostedFileBase[] Uploads)
         {
             if (ModelState.IsValid)
             {
-                if (upload != null && upload.ContentLength > 0)
+                if (Uploads != null && Uploads.Length >= 1)
                 {
-                    string fileName = Path.GetFileName(upload.FileName);
-                    string extension = Path.GetExtension(fileName).ToLower();
-                    if (extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".gif")
+                    galery.GaleryFiles.Clear();
+                    foreach (var item in Uploads)
                     {
-                        string path = Path.Combine(ConfigurationManager.AppSettings["uploadPath"], fileName);
-                        upload.SaveAs(path);
-                        galery.Photo = fileName;
-                        galeryService.Insert(galery);
-                        return RedirectToAction("index");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("Photo", "Dosya uzantısı .jpg, .jpeg, .png ya da .gif olmalıdır.");
-                    }
-                }
-                else
-                {
-                    galeryService.Insert(galery);
-                    return RedirectToAction("index");
-                }
+                        if (item != null && item.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(item.FileName);
+                            var extension = Path.GetExtension(fileName).ToLower();
+                            if (extension == ".jpg" || extension == ".gif" || extension == ".png" || extension == ".pdf" || extension == ".doc" || extension == ".docx")
+                            {
+                                var path = Path.Combine(ConfigurationManager.AppSettings["uploadPath"], fileName);
+                                item.SaveAs(path);
+                                var file = new GaleryFile();
+                                file.Id = Guid.NewGuid();
+                                file.FileName = fileName;
+                                file.CreatedAt = DateTime.Now;
+                                file.CreatedBy = User.Identity.Name;
+                                file.UpdatedAt = DateTime.Now;
+                                file.UpdatedBy = User.Identity.Name;
 
+                                galery.GaleryFiles.Add(file);
+                            }
+                        }
+                    }
+                }
+                galeryService.Insert(galery);
+                return RedirectToAction("Index");
             }
+
+        
             
             return View(galery);
         }

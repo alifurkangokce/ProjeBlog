@@ -10,9 +10,14 @@ namespace Blog.Model
 {
    public class Galery:BaseEntity
     {
+        public Galery()
+        {
+            GaleryFiles = new HashSet<GaleryFile>();
+        }
         [Display(Name ="Başlık")]
         public string Title { get; set; }
         [Display(Name = "Fotograf")]
         public string Photo { get; set; }
+        public virtual ICollection<GaleryFile> GaleryFiles{ get; set; }
     }
 }

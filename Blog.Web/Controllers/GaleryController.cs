@@ -11,8 +11,10 @@ namespace Blog.Web.Controllers
     public class GaleryController : Controller
     {
         private readonly IGaleryService galeryService;
-        public GaleryController(IGaleryService galeryService)
+        private readonly ICategoryService categoryService;
+        public GaleryController(IGaleryService galeryService, ICategoryService categoryService)
         {
+            this.categoryService = categoryService;
             this.galeryService = galeryService;
         }
         // GET: Galery
@@ -20,6 +22,7 @@ namespace Blog.Web.Controllers
         {
        
             ViewBag.AssetsUrl = ConfigurationManager.AppSettings["assetsUrl"];
+            ViewBag.Categories = categoryService.GetAll();
             return View(galeryService.GetAll());
         }
     }
