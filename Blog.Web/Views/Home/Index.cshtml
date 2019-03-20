@@ -161,10 +161,6 @@
                 {
 
                     <div class="col-md-4">
-
-
-
-
                         <div class="entry__thumb">
                             <a href="@Url.Action("Index","Category",new {id=item.Id })" class="entry__thumb-link">
                                 <img src="@(ViewBag.AssetsUrl)@(item.PostFiles.FirstOrDefault()?.FileName)" style=" width:300px; height:200px; " />
@@ -177,7 +173,7 @@
                                 <div class="entry__date">
                                     <a href="single-standard.html">@item.CreatedAt.ToString("dd/MM/yyyy")</a>
                                 </div>
-                                <h1 class="entry__title"><a href="@Url.Action("Index","Category",new {id=item.Id })"> @Html.Raw(item.Description)</a></h1>
+                                <h1 class="entry__title"><a href="@Url.Action("Index","Category",new {id=item.Id })"> @Html.Raw(item.Title)</a></h1>
 
                             </div>
                         </div>
