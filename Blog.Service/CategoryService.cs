@@ -74,6 +74,7 @@ namespace Blog.Service
             var category = categoryRepository.Find(entity.Id);
             category.Name = entity.Name;
             category.Description = entity.Description;
+            category.Photo = entity.Photo;
             categoryRepository.Update(category);
             unitOfWork.SaveChanges();
         }

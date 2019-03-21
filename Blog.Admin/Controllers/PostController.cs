@@ -125,7 +125,7 @@ namespace Blog.Admin.Controllers
                
                
                 model.Photo = post.Photo;
-          
+                model.CategoryId = post.CategoryId;
                 postService.Update(model);
                 return RedirectToAction("Index");
 

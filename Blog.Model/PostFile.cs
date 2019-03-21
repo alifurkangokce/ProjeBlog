@@ -11,7 +11,7 @@ namespace Blog.Model
    public class PostFile:BaseEntity
     {
         public string FileName { get; set; }
-        public Guid PostId { get; set; }
+        public Guid? PostId { get; set; }
         [ForeignKey("PostId")]
         public virtual Post Post{ get; set; }
     }
