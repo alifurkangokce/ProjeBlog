@@ -45,6 +45,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="CategoryService.cs" />
     <Compile Include="GaleryService.cs" />
+    <Compile Include="PostFileService.cs" />
     <Compile Include="PostService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -15,10 +15,12 @@ namespace Blog.Admin.Controllers
         // GET: Post
         private readonly IPostService postService;
         private readonly ICategoryService categoryService;
-        public PostController(IPostService postService, ICategoryService categoryService):base()
+        private readonly IPostFileService postFileService;
+        public PostController(IPostService postService, ICategoryService categoryService, IPostFileService postFileService) :base()
         {
             this.postService = postService;
             this.categoryService = categoryService;
+            this.postFileService = postFileService;
         }
         // GET: Post
         public ActionResult Index()
@@ -38,6 +40,7 @@ namespace Blog.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                postService.Insert(post);
                 if (Uploads != null && Uploads.Length >= 1)
                 {
                     post.PostFiles.Clear();
@@ -58,13 +61,13 @@ namespace Blog.Admin.Controllers
                                 file.CreatedBy = User.Identity.Name;
                                 file.UpdatedAt = DateTime.Now;
                                 file.UpdatedBy = User.Identity.Name;
-                                
-                                post.PostFiles.Add(file);
+                                file.PostId = post.Id;
+                                postFileService.Insert(file);
                             }
                         }
                     }
                 }
-                postService.Insert(post);
+                
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryId = new SelectList(categoryService.GetAll(), "Id", "Name", post.CategoryId);
@@ -109,8 +112,8 @@ namespace Blog.Admin.Controllers
                                 file.CreatedBy = User.Identity.Name;
                                 file.UpdatedAt = DateTime.Now;
                                 file.UpdatedBy = User.Identity.Name;
-                                
-                                model.PostFiles.Add(file);
+                                file.PostId = post.Id;
+                                postFileService.Insert(file);
                             }
                         }
                     }
@@ -127,6 +130,7 @@ namespace Blog.Admin.Controllers
                 model.Photo = post.Photo;
                 model.CategoryId = post.CategoryId;
                 postService.Update(model);
+            
                 return RedirectToAction("Index");
 
 

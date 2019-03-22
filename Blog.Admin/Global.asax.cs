@@ -53,6 +53,7 @@ namespace Blog.Admin
             builder.RegisterType(typeof(UnitOfWork)).As(typeof(IUnitOfWork)).InstancePerRequest();
             //servisleri register et
             builder.RegisterType(typeof(PostService)).As(typeof(IPostService)).InstancePerDependency();
+            builder.RegisterType(typeof(PostFileService)).As(typeof(IPostFileService)).InstancePerDependency();
             builder.RegisterType(typeof(CategoryService)).As(typeof(ICategoryService)).InstancePerDependency();
             builder.RegisterType(typeof(GaleryService)).As(typeof(IGaleryService)).InstancePerDependency();
             builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
