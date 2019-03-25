@@ -1,4 +1,5 @@
 ﻿using Blog.Service;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,13 +19,15 @@ namespace Blog.Web.Controllers
             this.postService = postService;
             this.categoryService = categoryService;
         }
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
            
             ViewBag.Categories = categoryService.GetAll();
             ViewBag.AssetsUrl = ConfigurationManager.AppSettings["assetsUrl"];
             var posts = postService.GetAll();
-            return View(posts);
+            var pageNumber = page ?? 1;
+            var onePageOfPosts = posts.ToPagedList(pageNumber, 3);
+            return View(onePageOfPosts);
         }
 
         public ActionResult About()
