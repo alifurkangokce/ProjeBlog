@@ -11,8 +11,10 @@ namespace Blog.Web.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService categoryService;
-        public CategoryController(ICategoryService categoryService)
+        private readonly IPostService postService;
+        public CategoryController(ICategoryService categoryService, IPostService postService)
         {
+            this.postService = postService;
             this.categoryService = categoryService;
         }
         // GET: Category
@@ -27,6 +29,7 @@ namespace Blog.Web.Controllers
         {
             var category = categoryService.Find(id);
             ViewBag.Categories = categoryService.GetAll();
+            ViewBag.Posts = postService.GetAll();
             ViewBag.AssetsUrl = ConfigurationManager.AppSettings["assetsUrl"];
             return View(category);
         }
