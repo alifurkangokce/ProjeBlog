@@ -1,4 +1,5 @@
 ﻿@model Blog.Model.Category
+
 <section class="s-pageheader s-pageheader--home">
 
     <header class="header">
@@ -85,15 +86,12 @@
             <div class="featured">
 
                 <div class="featured__column featured__column--big">
-                    <div class="entry" style="background-image:url('images/thumbs/featured/featured-guitarman.jpg');">
 
-                        <div class="entry__content">
-                            <span class="entry__category"><a href="/#0">@Model.Name</a></span>
+                    <div class="entry">
+                        <video width="750" controls>
+                            <source src="~/Videos/1.mp4" type="video/mp4">
 
-                            <h1><a href="/#0" title="">Ruhunu beslemekten vazgeçme</a></h1>
-
-
-                        </div> <!-- end entry__content -->
+                        </video>
 
                     </div> <!-- end entry -->
                 </div> <!-- end featured__big -->
@@ -149,7 +147,7 @@
                 </div>
             </div> <!-- end s-content__media -->
 
-           
+
         </div>
     </div>
     <div class="row">
@@ -157,24 +155,23 @@
             <div class="masonry">
                 @foreach (var item in Model.Posts)
                 {
-
                     <div class="col-md-4">
-                        <div class="entry__thumb">
-                            <p>@Html.Raw(item.Description)</p>
-
-                            
-                        </div>
                         <div class="entry__text">
-                            <div class="entry__header">
-                                @*<a class="entry__header" href="@Url.Action("Details", "Category", new { id = item.Id })"><h3>@item.Title</h3></a>*@     
-
+                            <div class="entry__header"style="background-color:#e6e8ed">
+                                @*<a class="entry__header" href="@Url.Action("Details", "Category", new { id = item.Id })"><h3>@item.Title</h3></a>*@
+                                <p class="entry__header" style="font-size:40px;color:black;font-family:'Times New Roman' !important; font-weight:bold">@Html.Raw(item.Title)</p>
                             </div>
                         </div>
 
+                        <div class="entry__text">
+                            <div class="entry__thumb">
 
+                                <p>@Html.Raw(item.Description)</p>
+
+
+                            </div>
+                        </div>
                     </div>
-
-
 
                 }
             </div>
