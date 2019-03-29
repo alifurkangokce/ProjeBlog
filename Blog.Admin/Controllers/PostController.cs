@@ -50,7 +50,7 @@ namespace Blog.Admin.Controllers
                         {
                             var fileName = Path.GetFileName(item.FileName);
                             var extension = Path.GetExtension(fileName).ToLower();
-                            if (extension == ".jpg" || extension == ".gif" || extension == ".png" || extension == ".pdf" || extension == ".doc" || extension == ".docx")
+                            if (extension == ".jpg" || extension == ".gif" || extension == ".png" || extension == ".pdf" || extension == ".doc" || extension == ".docx"|| extension==".JPEG")
                             {
                                 var path = Path.Combine(ConfigurationManager.AppSettings["uploadPath"], fileName);
                                 item.SaveAs(path);

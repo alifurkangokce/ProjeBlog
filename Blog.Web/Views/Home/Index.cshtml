@@ -32,21 +32,7 @@
                 </li>
             </ul> <!-- end header__social -->
 
-            <a class="header__search-trigger" href="/#0"></a>
-
-            <div class="header__search">
-
-                <form role="search" method="get" class="header__search-form" action="#">
-                    <label>
-                        <span class="hide-content">Search for:</span>
-                        <input type="search" class="search-field" placeholder="Type Keywords" value="" name="s" title="Search for:" autocomplete="off">
-                    </label>
-                    <input type="submit" class="search-submit" value="Search">
-                </form>
-
-                <a href="/#0" title="Close Search" class="header__overlay-close">Close</a>
-
-            </div>  <!-- end header__search -->
+            
 
 
             <a class="header__toggle-menu" href="/#0" title="Menu"><span>Menu</span></a>
@@ -58,11 +44,9 @@
                 <ul class="header__nav">
                     <li class="current"><a href="@Url.Action("Index", "Home")">Anasayfa</a></li>
                     <li class="has-children">
-                        <a href="@Url.Action("Index", "Category")">Kategoriler</a>
+                        <a href=>Kategoriler</a>
                         <ul class="sub-menu">
-                            <li>
-                                <a href="@Url.Action("Index", "Category")">Kategoriler</a>
-                            </li>
+
                             @foreach (var item in ViewBag.Categories)
                             {
                                 <li>
@@ -97,7 +81,7 @@
                         <div class="entry__content">
                             <span class="entry__category"><a href="/#0">Müzik</a></span>
 
-                            <h1><a href="/#0" title="">Ruhunu beslemekten vazgeçme</a></h1>
+                            <h1><a href="http://localhost:57299/Category/Details/59850841-5d2f-49c6-ace3-e67b7a5da7c8" title="">Ruhunu beslemekten vazgeçme</a></h1>
 
 
                         </div> <!-- end entry__content -->
@@ -112,7 +96,7 @@
                         <div class="entry__content">
                             <span class="entry__category"><a href="/#0">Zaman</a></span>
 
-                            <h1><a href="/#0" title="">Zaman yönetimi ve sağlık doğru orantılıdır.</a></h1>
+                            <h1><a href="http://localhost:57299/Category/Details/91ac582a-2da6-47a6-ba0d-23823ecca79b" title="">Zaman yönetimi ve sağlık doğru orantılıdır.</a></h1>
 
                         </div> <!-- end entry__content -->
 
@@ -123,7 +107,7 @@
                         <div class="entry__content">
                             <span class="entry__category"><a href="/#0">Yaşam Tarzı</a></span>
 
-                            <h1><a href="/#0" title="">Sınırlaını sporla keşfet</a></h1>
+                            <h1><a href="http://localhost:57299/Category/Details/2802dbe8-18a8-403e-af4b-d48eab94ee26" title="">Sınırlaını sporla keşfet</a></h1>
 
                         </div> <!-- end entry__content -->
 
