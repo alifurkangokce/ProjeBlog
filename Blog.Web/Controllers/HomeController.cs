@@ -101,7 +101,7 @@ namespace Blog.Web.Controllers
 
 
             System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
-            smtp.Credentials = new System.Net.NetworkCredential("mail", "sifre");
+            smtp.Credentials = new System.Net.NetworkCredential("mail", "şifre");
             smtp.EnableSsl = true;
             smtp.Send(mailMessage);
 
